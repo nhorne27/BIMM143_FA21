@@ -1,0 +1,43 @@
+---
+title: "Class 11 Pt1"
+author: 'Natasha ( PID: A15393874)'
+date: "11/02/2021"
+output: pdf_document
+---
+
+A quick look at the PDB
+```{r}
+db <- read.csv("Data Export Summary.csv",row.names = 1)
+head(db)
+```
+> Q1: What percentage of structures in the PDB are solved by X-Ray and Electron Microscopy.
+
+```{r}
+methods.sums <- colSums(db)
+round((methods.sums/methods.sums["Total"])*100,2)
+```
+87.53% for X-Ray and 7.36% for NMR
+> Q2: What proportion of structures in the PDB are protein?
+
+```{r}
+round(db$Total/methods.sums["Total"]*100,2)
+```
+87.35%
+> Q3. Type HIV in the PDB website search box on the home page and determine how many HIV-1 protease structures are in the current PDB. There are 1828 HIV-1 protease structures in PDB.
+
+2. Visualizing the HIV-1 Protease Structure
+> Q4. Water molecules normally have 3 atoms. Why do we see just one atom per water molecule in this structure? In these water molecules we can only see one atom which is the oxygen atom because the hydrogens are too small to see.
+
+> Q5: There is a conserved water molecule in the binding site. Can you identify this water molecule? What residue number does this water molecule have (see note below)? The watermolecule is HOH308:O. It is conserved at residue 308.
+
+```{r}
+library(bio3d)
+pdb <- read.pdb("1hsg")
+
+```
+```{r}
+pdb
+
+```
+> Q6: As you have hopefully observed HIV protease is a homodimer (i.e. it is composed of two identical chains). With the aid of the graphic display and the sequence viewer extension can you identify secondary structure elements that are likely to only form in the dimer rather than
+the monomer? Extended beta and helix are likely to only form in the dimer rather thatn the monomer. They need at least two chains to form structures.
